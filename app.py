@@ -6,7 +6,8 @@ from selenium.webdriver.common.by import By
 from pathlib import Path
 import time
 
-def booting_driver():
+
+def botting_driver():
     # Setando as configurações
     chrome_options = Options()
     arguments = ['--lang=pt-BR', '--window-size=1200,1000', '--incognito'] # '--headless' para rodar em background
@@ -27,12 +28,10 @@ def booting_driver():
         'profile.default_content_setting_values.automatic_downloads': 1,
     })
 
-    # Inicializando o webdriver 
-    global driver
-    driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=chrome_options)
+    driver = webdriver.Chrome(service=ChromeService(
+        ChromeDriverManager().install()), options=chrome_options)
 
-def accessing_website(site):
-    driver.get(site)
+    return driver
 
 def find_element(type_of_selection, value):
     if type_of_selection == 'id':
@@ -74,20 +73,29 @@ def find_elements(type_of_selection, value):
     else:
         return None
 
-def finishing_connection():
-    driver.quit()
-    
 
-booting_driver()
-accessing_website('https://cursoautomacao.netlify.app/')
-time.sleep(2)
-botao = find_element('css', '.row')
-if botao:
-    print(botao.get_attribute('style'))
+driver = botting_driver()
+driver.get('https://cursoautomacao.netlify.app/desafios.html')
+
+botao1 = find_element('id', 'btn1')
+botao2 = find_element('class', 'btn2.btn.btn-dark')
+botao3 = find_element('class', 'btn2.btn.btn-warning')
+
+if botao1.is_enabled():
+    print('botão 1 está habilitado')
 else:
-    print('element not founded')
-input('Pressione ENTER para fechar o navegador...')
+    print('botão 1 está desabilitado')
+
+if botao2.is_enabled():
+    print('botão 2 está habilitado')
+else:
+    print('botão 2 está desabilitado')
+
+if botao3.is_enabled():
+    print('botão 3 está habilitado')
+else:
+    print('botão 3 está desabilitado')
 
 
-# time.sleep(10)
-# finishing_connection()
+input('')
+driver.close()
