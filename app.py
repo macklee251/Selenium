@@ -28,10 +28,13 @@ def botting_driver():
         'profile.default_content_setting_values.automatic_downloads': 1,
     })
 
+    global driver
     driver = webdriver.Chrome(service=ChromeService(
         ChromeDriverManager().install()), options=chrome_options)
+    return None
 
-    return driver
+def accessing_website(site):
+    driver.get(site)
 
 def find_element(type_of_selection, value):
     if type_of_selection == 'id':
@@ -73,9 +76,8 @@ def find_elements(type_of_selection, value):
     else:
         return None
 
-
-driver = botting_driver()
-driver.get('https://cursoautomacao.netlify.app/desafios.html')
+botting_driver()
+accessing_website('https://cursoautomacao.netlify.app/desafios.html')
 
 botao1 = find_element('id', 'btn1')
 botao2 = find_element('class', 'btn2.btn.btn-dark')
