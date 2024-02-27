@@ -76,28 +76,23 @@ def find_elements(type_of_selection, value):
     else:
         return None
 
+def scroll(value:str, x=0, y=0):
+    if (value == "top"):
+        return driver.execute_script("window.scrollTo(0, documentElement.scrollTop);")
+    elif(value == "bottom"):
+        return driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+    elif(value == "xy"):
+        return driver.execute_script(f"window.scrollBy({x},{y})")
+        
+    
+    return
+
 botting_driver()
 accessing_website('https://cursoautomacao.netlify.app/desafios.html')
-
-botao1 = find_element('id', 'btn1')
-botao2 = find_element('class', 'btn2.btn.btn-dark')
-botao3 = find_element('class', 'btn2.btn.btn-warning')
-
-if botao1.is_enabled():
-    print('botão 1 está habilitado')
-else:
-    print('botão 1 está desabilitado')
-
-if botao2.is_enabled():
-    print('botão 2 está habilitado')
-else:
-    print('botão 2 está desabilitado')
-
-if botao3.is_enabled():
-    print('botão 3 está habilitado')
-else:
-    print('botão 3 está desabilitado')
-
-
-input('')
+time.sleep(2)
+scroll('bottom')
+time.sleep(2)
+scroll('xy', 0, -1000)
+time.sleep(2)
+scroll('')
 driver.close()
