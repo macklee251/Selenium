@@ -83,16 +83,9 @@ def scroll(value:str, x=0, y=0):
         return driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
     elif(value == "xy"):
         return driver.execute_script(f"window.scrollBy({x},{y})")
-        
-    
-    return
+    else:
+        return
 
 botting_driver()
-accessing_website('https://cursoautomacao.netlify.app/desafios.html')
-time.sleep(2)
-scroll('bottom')
-time.sleep(2)
-scroll('xy', 0, -1000)
-time.sleep(2)
-scroll('')
-driver.close()
+accessing_website('https://cursoautomacao.netlify.app/index.html')
+input("")
